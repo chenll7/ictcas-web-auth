@@ -18,6 +18,8 @@ printAndExit(){
 if [ $(whoami) != "root" ];then
   printAndExit "不是以root身份执行"
 else
+  echo "下载缓慢时可以按Ctrl+C终止安装过程。"
+  trap "bash uninstall.sh & exit 0" 2
   echo "更新apt源……"
   apt-get update > /dev/null || printAndExit "更新apt源失败。是否联网？"
   echo "用apt安装依赖libfontconfig1"

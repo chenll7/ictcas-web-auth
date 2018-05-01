@@ -20,9 +20,9 @@ if [ $(whoami) != "root" ];then
 else
   echo "用apt移除依赖libfontconfig1"
   apt-get autoremove -y  libfontconfig1 > /dev/null || printAndExit "apt移除依赖失败。"
-#  echo "删除phantomjs"
-#  rm -rf $DIR/phantomjs-2.1.1-linux-x86_64
-#  rm $DIR/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  echo "删除phantomjs"
+  rm -rf $DIR/phantomjs-2.1.1-linux-x86_64
+  rm $DIR/phantomjs-2.1.1-linux-x86_64.tar.bz2
   echo "删除cron定时任务"
   rm /etc/cron.d/web-auth-ictcas
   echo "解安装完成！"
