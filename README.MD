@@ -14,9 +14,9 @@
 
 ### 主要
 
-　　先在config.json中配置好用户名密码。
+　　执行`sudo bash install.sh`，可以安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响。
 
-　　然后执行`sudo bash install.sh`，可以安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响。
+　　然后在config.json中配置好用户名密码。
 
 ### 其他
 
@@ -25,6 +25,8 @@
 　　执行`bash login.sh`，可以进行单次登陆。
 
 　　执行`bash logout.sh`，可以进行单次下线。
+
+　　[如何查看日志](https://blog.csdn.net/u014221090/article/details/53835969)
 
 ## 原理
 

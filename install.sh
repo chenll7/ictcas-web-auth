@@ -1,7 +1,7 @@
 #!/bin/sh
 #-----------------------------------
 #功能：安装依赖和在cron添加定时任务
-#作者：Bear(bearcubhaha@gmail.com)
+#作者：furrybear(bearcubhaha@gmail.com)
 #备注：仅在Ubuntu16.04上测试过，需要cron支持
 #修改时间：2018.04.28
 #-----------------------------------
@@ -26,9 +26,16 @@ else
     echo "下载phantomjs安装包"
     wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 || printAndExit "下载失败。是否有wget命令？"
   fi
-  echo "解压phantomjs安装包"
-  tar -xjf phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $DIR || printAndExit "解压安装包失败。请检查系统是否有tar命令。"
+  if [ ! -d "$DIR/phantomjs-2.1.1-linux-x86_64" ];then
+    echo "解压phantomjs安装包"
+    tar -xjf phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $DIR || printAndExit "解压安装包失败。请检查系统是否有tar命令。"
+  fi
+  if [ ! -f "config.json" ];then
+    echo "创建config.json文件"
+    echo -e "{\n  \"username\":\"\",\n  \"password\":\"\"\n}" > config.json 
+    chmod a+w config.json
+  fi
   echo "用cron设置定时执行认证上网"
-  echo "*/10 * * * * root bash $DIR/login.sh" > /etc/cron.d/web-auth-ictcas
+  echo -e "# 功能：定时调用login.sh进行计算所科研楼web认证上线\n# 备注：解安装时建议用uninstall.sh删除本文件\n# 作者：furrybear(bearcubhaha@gmial.com)\n*/10 * * * * root bash $DIR/login.sh" > /etc/cron.d/web-auth-ictcas
   echo "安装完成！"
 fi
