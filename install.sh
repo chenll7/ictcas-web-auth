@@ -38,6 +38,6 @@ else
 #    chmod a+w config.json
 #  fi
   echo "用cron设置定时执行认证上网"
-  echo -e "# 功能：定时调用login.sh进行计算所科研楼web认证上线\n# 备注：解安装时建议用uninstall.sh删除本文件\n# 作者：furrybear(bearcubhaha@gmial.com)\n*/10 * * * * root bash $DIR/login.sh" > /etc/cron.d/web-auth-ictcas
+  echo -e "# 功能：定时调用login.sh进行计算所科研楼web认证上线\n# 备注：解安装时建议用uninstall.sh删除本文件\n# 作者：furrybear(bearcubhaha@gmial.com)\n*/10 * * * * root bash $DIR/login-log.sh" > /etc/cron.d/web-auth-ictcas
   echo "安装完成！"
 fi
