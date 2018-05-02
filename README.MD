@@ -14,9 +14,9 @@
 
 ### 主要
 
-　　执行`sudo bash install.sh`，可以安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响。
+　　在config.json中配置好用户名密码。
 
-　　然后在config.json中配置好用户名密码。
+　　执行`sudo bash install.sh`，可以安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响。
 
 ### 其他
 
