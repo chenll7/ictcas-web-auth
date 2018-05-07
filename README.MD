@@ -8,27 +8,41 @@
 
 ## 环境
 
-　　仅在Ubuntu16.04上测试过，其他环境请自行阅读脚本并修改。环境需要安装cron，支持命令apt-get、wget和tar。
+　　仅在Ubuntu16.04上和Ubuntu16.04的docker-ce上测试过。
 
 ## 使用
 
 ### 主要
 
-　　在config.json中配置好用户名密码。
+#### 如果你的操作系统是Ubuntu16.04
 
-　　执行`sudo bash install.sh`，可以安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响。
+　　执行`bash install.sh <用户名> <密码>`，便会安装需要的依赖、设置cron定时执行web认证。install.sh可以多次执行，没有其他影响（如果用户名密码输错了也没有关系，可以在生成的config.json里修改用户名密码；如果安装失败了，可以执行`bash uninstall.sh`解安装；可以通过log/login.log查看日志，每十分钟生成一条日志）。
+
+#### 如果你的系统安装有docker
+
+　　执行`bash docker-build-and-run.sh <用户名> <密码>`，可以生成镜像和对应容器。容器会定时进行认证。
+
+执行
+
+```sh
+docker exec -it web-auth-ictcas /bin/bash
+```
+
+来进入容器查看日志。
+
+#### 以上操作都需要在联网状态下执行
+
+　　以上操作都需要联网下载安装一些依赖（phantomjs等）。如果没联网，请先用[w3m](https://pkgs.org/download/w3m)等浏览器访问`http://159.226.39.22/srun_portal_pc.php?ac_id=1`进行手工认证。
 
 ### 其他
 
-　　执行`sudo bash uninstall.sh`，可以解除安装。
+　　执行`bash uninstall.sh`，可以解除安装。
 
-　　执行`bash login.sh`，可以进行单次登陆。
+　　执行`bash login.sh`，可以进行一次登陆。
 
-　　执行`bash login-log.sh`，可以调用login.sh进行单次登录并记录一条日志到login.log。
+　　执行`bash login-log.sh`，可以调用login.sh进行单次登录并记录一条日志到log/login.log。
 
-　　执行`bash logout.sh`，可以进行单次下线。
-
-　　[如何查看日志](https://blog.csdn.net/u014221090/article/details/53835969)
+　　执行`bash logout.sh`，可以进行一次下线。
 
 ## 原理
 
