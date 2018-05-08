@@ -12,4 +12,4 @@ if [ $# != 2 ];then
   exit -1
 fi
 docker build -t web-auth-ictcas .
-docker run --name web-auth-ictcas --restart always -d web-auth $1 $2
+docker run --name web-auth-ictcas --restart always -d web-auth-ictcas $1 $2
