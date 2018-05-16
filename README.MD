@@ -30,6 +30,8 @@ docker exec -it web-auth-ictcas /bin/bash
 
 来进入容器查看日志。
 
+（网络问题，镜像推不到Docker Hub上……）
+
 #### 以上操作都需要在联网状态下执行
 
 　　以上操作都需要联网下载安装一些依赖（phantomjs等）。如果没联网，请先用[w3m](https://pkgs.org/download/w3m)等浏览器访问`http://159.226.39.22/srun_portal_pc.php?ac_id=1`进行手工认证。
@@ -56,6 +58,6 @@ docker exec -it web-auth-ictcas /bin/bash
 
 ## 联系
 
-　　furrybear(bearcubhaha@gmail) 
+　　furrybear(lfbll@outlook.com) 
 
 　　2018-04-28
