@@ -30,5 +30,5 @@ if [ $out == 99 ];then
 elif [ $out == 100 ];then
   echo "认证成功，已经联网。" >> $DIR_LOG/login.log
 elif [ $out == 101 ];then
-  echo "认证失败，仍未联网。请检查config.json配置。" >> $DIR_LOG/login.log
+  echo "认证失败，仍未联网。可能错误原因:（1）config.json设置错误（2）该账号在线IP数达到上限，建议前往“https://gw.ict.ac.cn:8900/”查看或者执行bash logout.sh强迫其他IP下线。" >> $DIR_LOG/login.log
 fi

@@ -20,31 +20,38 @@
 
 #### 如果你的系统安装有docker
 
-　　执行`bash docker-build-and-run.sh <用户名> <密码>`，可以生成镜像和对应容器。容器会定时进行认证。
+　　执行`bash docker-build-and-run.sh <用户名> <密码>`，可以生成镜像和并运行对应容器。容器会定时进行登录。
 
-执行
+　　执行`docker exec -it web-auth-ictcas /bin/bash`来进入容器查看日志。
 
-```sh
-docker exec -it web-auth-ictcas /bin/bash
-```
+　　执行`docker rm -f web-auth-ictcas`来删除容器。
 
-来进入容器查看日志。
+　　执行`docker run --name web-auth-ictcas --restart always -d web-auth-ictcas <用户名> <密码>`来启动容器。
 
-（网络问题，镜像推不到Docker Hub上……）
+（网络问题，做成的镜像推不到Docker Hub上……）
 
 #### 以上操作都需要在联网状态下执行
 
-　　以上操作都需要联网下载安装一些依赖（phantomjs等）。如果没联网，请先用[w3m](https://pkgs.org/download/w3m)等浏览器访问`http://159.226.39.22/srun_portal_pc.php?ac_id=1`进行手工认证。
+　　以上操作都需要联网下载安装一些依赖（phantomjs和libfontconfig1）。
+
+　　如果没联网，请先用[w3m](https://pkgs.org/download/w3m)等浏览器访问`http://159.226.39.22/srun_portal_pc.php?ac_id=1`进行手工认证。
+
+　　因为实验室有免费ipv6，所以应该可以这样获得w3m：
+
+```
+sudo apt-get -o Acquire::ForceIPv6=true update
+sudo apt-get -o Acquire::ForceIPv6=true install -y w3m w3m-img
+```
 
 ### 其他
 
-　　执行`bash uninstall.sh`，可以解除安装。
+　　执行`bash uninstall.sh`，可以解除安装（删除libfontconfig1、删除/etc/cron.d/web-auth-ictcas）。
 
 　　执行`bash login.sh`，可以进行一次登陆。
 
 　　执行`bash login-log.sh`，可以调用login.sh进行单次登录并记录一条日志到log/login.log。
 
-　　执行`bash logout.sh`，可以进行一次下线。
+　　执行`bash logout.sh`，可以进行一次下线。如果config.json里的用户名密码是正确的，会造成该账号登录的所有IP下线，否则只有本IP下线。
 
 ## 原理
 

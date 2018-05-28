@@ -4,7 +4,7 @@
 #作者：furrybear<bearcubhaha@gmail.com>
 #-------------------
 if [ $# != 2  ];then
-  echo "必须有两个参数作为用户名密码！" > /web-auth-ictcas/log/error.log
+  echo "必须有两个参数作为用户名密码！"
   exit -1
 fi
 echo -e "{\n  \"username\":\"$1\",\n  \"password\":\"$2\"\n}"  > /web-auth-ictcas/config.json
