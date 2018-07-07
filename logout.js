@@ -3,10 +3,15 @@
 var page = require('webpage').create();
 phantom.outputEncoding="utf-8";
 
-var fs=require("fs");
-var oConfig=JSON.parse(fs.read("config.json"));
-var username=oConfig.username;
-var password=oConfig.password;
+//var fs=require("fs");
+//var oConfig=JSON.parse(fs.read("config.json"));
+//var username=oConfig.username;
+//var password=oConfig.password;
+
+var system = require('system');
+var env = system.env;
+var username=env["USERNAME"];
+var password=env["PASSWD"];
 
 page.open("http://159.226.39.22/srun_portal_pc.php?ac_id=1&", function(status) {
   if ( status === "success" ) {

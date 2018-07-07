@@ -4,13 +4,6 @@
 #返回：0
 #-----------------------------------------
 
-#本文件所在目录
-DIR="$( cd "$( dirname "$0"  )" && pwd  )"
-
-cd $DIR
-
-export PATH="$DIR/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
-
 run () {
   echo "进行注销操作"
   echo "------------------"
@@ -20,4 +13,3 @@ run () {
 }
 
 run
-exit 0
