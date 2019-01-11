@@ -1,26 +1,24 @@
-# 中科院计算所定时web认证程序（web-auth-ictcas）
+# 中科院计算所定时web认证程序（Web Auth ICTCAS）
 
 ## 功能
 
-　　由于中科院计算所科研楼实验室的网经常莫名其妙断掉，造成一些麻烦，比如与跳板机断开连接。
-
-　　这个程序可以定时进行web认证，防止长时间不使用断网。
+　　中科院计算所科研楼定时web认证程序，防止长时间不使用断网。
 
 ## 环境
 
-　　仅在Ubuntu16.04的docker-ce上测试过。
+　　需要预先安装Docker。
 
 ## 运行
 
-　　到<https://github.com/furrybear/web-auth-ictcas/releases>下载web-auth-ictcas-release.tar.gz。然后根据里面README.MD加载镜像和运行容器就可以了：
+　　到<https://github.com/furrybear/web-auth-ictcas/releases>下载web-auth-ictcas-release.tar.gz。在run.sh里添加用户名和密码，然后加载镜像和运行容器就可以了：
 
 ```sh
 bash load.sh && bash run.sh
 ```
 
-## 说明
+## 另一种运行方式
 
-　　这个仓库是docker镜像的Dockerfile。
+将项目克隆下来，进入目录。
 
 构建镜像的命令：
 
@@ -48,6 +46,6 @@ docker run -d \
 
 ## 联系
 
-　　furrybear(fbcll@outlook.com)
+　　Furrybear(fbcll@outlook.com)
 
 　　2018-04-28
