@@ -18,7 +18,12 @@ bash load.sh && bash run.sh
 
 ## 另一种运行方式
 
-将项目克隆下来，进入目录。
+将项目克隆下来，进入目录：
+
+```sh
+git clone https://github.com/furrybear/web-auth-ictcas.git
+cd web-auth-ictcas
+```
 
 构建镜像的命令：
 
