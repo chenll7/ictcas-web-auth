@@ -6,7 +6,7 @@
 
 ## 环境
 
-　　需要预先安装Docker。
+　　需要预先安装Docker（建议先在能上网的机器上用SSR或者SS搭建http代理，然后利用代理安装上Docker先）。
 
 ## 运行
 
@@ -49,8 +49,12 @@ docker run -d \
 
 　　登陆原理是用phantomjs在<http://159.226.39.22/srun_portal_pc.php?ac_id=1&>填写表单，然后点击登陆按钮。
 
+## 备注
+
+　　写这东西的时候我还不知道docker-compose，使用docker-compose管理容器会更方便。但是我不想维护了，又不是不能用。
+
 ## 联系
 
 　　Furrybear(fbcll@outlook.com)
 
-　　2018-04-28
+　　2019-01-13
