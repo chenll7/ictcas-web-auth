@@ -51,7 +51,7 @@ docker run -d \
 
 ## 备注
 
-　　写这东西的时候我还不知道docker-compose，使用docker-compose管理容器会更方便。但是我不想维护了，又不是不能用。
+　　写这东西的时候我还不知道docker-compose，使用docker-compose管理容器会更方便。但是我不想维护了。
 
 ## 联系
 
