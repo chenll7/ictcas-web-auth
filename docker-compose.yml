@@ -1,0 +1,6 @@
+version:'3'
+
+services:
+  ictcas-web-auth:
+    image: furrybear/ictcas-web-auth
+    command: ./login.sh

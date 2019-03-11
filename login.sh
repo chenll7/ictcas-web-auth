@@ -1,46 +1,90 @@
 #!/bin/sh
-#-----------------------------------------
-#功能：调用“phantomjs login.js”来进行登录操作
-#返回：没有进行任何操作返回99，进行认证并成功联网返回100，进行认证但是没有成功联网返回101
-#-----------------------------------------
 
-#export PATH="$DIR/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
-
-checkAccess () {
-    echo "检查是否联网"
-    ping -c 2 www.baidu.com >/dev/null 2>&1
-    return $?
+check_online () {
+    echo "Ping baidu to check if it is online."
+    ping -c 1 www.baidu.com >/dev/null 2>&1
 }
 
-run () {
-    echo "进行web认证上网操作"
-    checkAccess
-    if [ $? -eq 0 ];then
-        echo "已经联网了"
-        return 99
+login () {
+    printf "Start ...\n"
+    check_online && { printf "Online now.\n";return 0; }
+    echo "It is offline!"
+    for i in $(seq 0 1);do
+        printf "Login with phantomjs ...\n"
+        printf "******************\n"
+        timeout -s 2 10 phantomjs --ignore-ssl-errors=true login.js
+        printf "******************\n"
+        printf "Login operation finished.\n"
+        check_online && { printf "Online now.\n";return 0; }
+        printf "Still offline.\n"
+        if [ $FORCE_MODE -eq 1 ];then
+            printf "Perhaps the online IPs are full. Try to log them out.\n"
+            printf "Logout with phantomjs ...\n"
+            printf "******************\n"
+            timeout -s 2 10 phantomjs --ignore-ssl-errors=true logout.js
+            printf "******************\n"
+            printf "Logout operation finished.\n"
+        fi
+    done
+    if [ $FORCE_MODE -eq 1 ];then
+        printf "Try many times but sill fail。Possible reason: Wrong username or password.\n"
     else
-        echo "没有联网！"		
-        for i in $(seq 0 1);do
-            echo "进行登录操作"
-            echo "------------------"
-            timeout -s 2 10 phantomjs --ignore-ssl-errors=true login.js
-            echo "------------------"
-            echo "登录操作完毕"
-            checkAccess
-            if [ $? -eq 0 ];then
-                echo "已经联网了"
-                return 100
-            else
-                echo "还是没有联网"
-            fi
-        done
-        echo "多次尝试联网但是联网失败。可能错误原因:（1）用户名密码设置错误（2）该账号在线IP数达到上限，建议前往“https://gw.ict.ac.cn:8900/”查看或者执行bash logout.sh强迫其他IP下线。"
-        return 101
+        printf "Try many times but sill fail。Possible reason: (1) Wrong username or password. (2) Online IPs are full. You can try to run logout.sh to log them out.\n"
     fi
+    return 1
 }
 
-run
-out=$?
-echo "认证联网脚本结束"
-echo "返回值为$out"
-exit $out
+INTERVAL_MODE=0
+FORCE_MODE=0
+
+ARGS=`getopt -o u:p: --long username:,password:,interval,force -- "$@"` || exit 1
+
+eval set -- "${ARGS}"
+
+while true;do
+    case "$1" in
+        -u|--username)
+            printf "Username is '$2'.\n";
+            export USERNAME=$2
+            shift 2
+            ;;
+        -p|--password)
+            printf "Password is '$2'.\n";
+            export PASSWD=$2
+            shift 2
+            ;;
+        --interval)
+            printf "Interval mode.\n";
+            INTERVAL_MODE=1
+            shift
+            ;;
+        --force)
+            printf "Force mode (if online IP is full, force them to be offline ).\n";
+            FORCE_MODE=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Error!"
+            exit 1
+            ;;
+    esac
+done
+if [ -n "$USERNAME" -a -n "$PASSWD" ];then
+    if [ $INTERVAL_MODE -eq 1 ];then
+        while true;do
+            login
+            printf "Sleep 180s ...\n"
+            sleep 180s
+        done
+    else
+        login
+    fi
+else
+    printf "Warning: username or password is not set.Terminating ...\n"
+fi
+
+printf "Program exit.\n"
