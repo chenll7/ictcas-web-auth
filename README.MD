@@ -1,4 +1,4 @@
-# 中科院计算所定时web认证程序（Web Auth ICTCAS）
+# 中科院计算所定时web认证脚本（ICTCAS WEB AUTH）
 
 ## 功能
 
@@ -6,42 +6,15 @@
 
 ## 环境
 
-　　需要预先安装Docker（建议先在能上网的机器上用SSR或者SS搭建http代理，然后利用代理安装上Docker先）。
+　　Ubuntu，需要预先安装phantomjs和libfontconfig1（建议先在能上网的机器上用SSR或者SS搭建http代理，然后利用代理下载[phantomjs](http://phantomjs.org/download.html)和安装libfontconfig1（`apt install libfontconfig1`））。
 
 ## 运行
 
-　　到<https://github.com/furrybear/web-auth-ictcas/releases>下载web-auth-ictcas-release.tar.gz。在run.sh里添加用户名和密码，然后加载镜像和运行容器就可以了：
+登录：`./login.sh -u <用户名> -p <密码>`
+注销：`./logout.sh -u <用户名> -p <密码>`
+保持登录：`./login.sh -u <用户名> -p <密码> --interval`
+保持登录（发现在线IP满了就强行注销再登录）：`./login.sh -u <用户名> -p <密码> --interval --force`
 
-```sh
-bash load.sh && bash run.sh
-```
-
-## 另一种运行方式
-
-将项目克隆下来，进入目录：
-
-```sh
-git clone https://github.com/furrybear/web-auth-ictcas.git
-cd web-auth-ictcas
-```
-
-构建镜像的命令：
-
-```sh
-docker build -t furrybear/web-auth-ictcas .
-```
-
-运行容器的命令：
-
-```sh
-docker run -d \
- --user $(id -u) \
- -e USERNAME="<你的上网账号用户名>" \
- -e PASSWD="<你的上网账号密码>" \
- -v <存放日志的目录>:/log \
- --restart always \
- --name furrybear/web-auth-ictcas web-auth-ictcas
-```
 
 ## 原理
 
@@ -49,12 +22,4 @@ docker run -d \
 
 　　登陆原理是用phantomjs在<http://159.226.39.22/srun_portal_pc.php?ac_id=1&>填写表单，然后点击登陆按钮。
 
-## 备注
-
-　　写这东西的时候我还不知道docker-compose，使用docker-compose管理容器会更方便。但是我不想维护了。
-
-## 联系
-
-　　Furrybear(fbcll@outlook.com)
-
-　　2019-01-13
+　　2019-03-13

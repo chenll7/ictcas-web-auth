@@ -1,0 +1,9 @@
+[Unit]
+Description=hehe daemon
+
+[Service]
+WorkingDirectory=/home/
+ExecStart=/home/login.sh -u  -p  --interval --force
+
+[Install]
+WantedBy=multi-users.target

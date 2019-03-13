@@ -1,5 +1,5 @@
-From ubuntu:16.04
-Maintainer furrybear fbcll@outlook.com
+From debian:jessie
+Maintainer Furrybear fbcll@outlook.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
  && apt-get install -y sudo wget tar bzip2 inetutils-ping libfontconfig1 \
  && rm -rf /var/lib/apt/lists/* \
- && apt clean
+ && apt-get clean
 
 #安装phantomjs
 ADD https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 phantomjs-2.1.1-linux-x86_64.tar.bz2
