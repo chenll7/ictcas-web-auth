@@ -1,4 +1,4 @@
-From registry.docker-cn.com/library/ubuntu:16.04
+From ubuntu:16.04
 Maintainer furrybear bearcubhaha@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
