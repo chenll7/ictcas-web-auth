@@ -1,5 +1,9 @@
 # 中科院计算所定时web认证程序（Web Auth ICTCAS）
 
+## 相关链接
+
+最近发现类似功能的有[andrewlee302/ICT-Dialer](https://github.com/andrewlee302/ICT-Dialer)，但是没有用过，可以先试试这个脚本。
+
 ## 功能
 
 　　中科院计算所科研楼定时web认证程序，防止长时间不使用断网。
@@ -57,4 +61,4 @@ docker run -d \
 
 　　Furrybear(fbcll@outlook.com)
 
-　　2019-01-13
+　　2019-06-16
