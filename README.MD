@@ -2,7 +2,7 @@
 
 ## 相关链接
 
-最近发现类似功能的有[andrewlee302/ICT-Dialer](https://github.com/andrewlee302/ICT-Dialer)，但是没有用过，可以先试试这个脚本。
+　　最近发现类似功能的有[andrewlee302/ICT-Dialer](https://github.com/andrewlee302/ICT-Dialer)，但是没有用过，可以先试试这个脚本。
 
 ## 功能
 
